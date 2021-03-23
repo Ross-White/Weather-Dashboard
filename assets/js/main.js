@@ -29,29 +29,29 @@ function handleFormSubmit() {
     var inputName = document.querySelector('#city-input').value;
     console.log(inputName);
     var cityNameEl = document.createElement("li");
+    cityNameEl.setAttribute("class", "city-name-li");
     cityNameEl.textContent = inputName;
-    var deleteBtnEl = document.createElement("button");
-    deleteBtnEl.textContent = "Delete";
-    deleteBtnEl.setAttribute("class", "delete-item-btn");
-    cityNameEl.appendChild(deleteBtnEl);
+    // var deleteBtnEl = document.createElement("button");
+    // deleteBtnEl.textContent = "Delete";
+    // deleteBtnEl.setAttribute("class", "delete-item-btn");
+    // cityNameEl.appendChild(deleteBtnEl);
     cityListEl.appendChild(cityNameEl);
-
 }
 
-
-// cityNameEl.on('click', '.delete-item-btn', handleRemoveItem);
+document.querySelector(".city-list").addEventListener('click', (getWeather));
 cityFormEl.addEventListener('submit', (handleFormSubmit));
 
+var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
 var cityName = "Manchester";
-var apiKey = "9d4409d2aba8ab623ad65173ce78380e"
 
 function getWeather() {
+    // var cityName = event.target.textContent;
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        // console.log(data);
+        console.log(data);
     });
 }
-getWeather ();
+// getWeather ();
