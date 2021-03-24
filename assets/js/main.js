@@ -15,41 +15,33 @@ function displayTime() {
     let time = moment().format('hh:mm');
     let date = moment().format('MMM Do YYYY');
     timeEl.textContent = time;
-    // console.log(time);
     dateEl.textContent = date;
-    // console.log(date);
 }
 setInterval(displayTime, 1000);
 
 var cityListEl = document.querySelector('.city-list');
 var cityFormEl = document.querySelector('.city-input-form');
-// var submitCityBtn = document.querySelector('.city-submit-btn');
 
-function handleFormSubmit() {
+function handleFormSubmit(event) {
     event.preventDefault();
-    var inputName = document.querySelector('#city-input').value;
-    console.log(inputName);
+    var inputName = document.querySelector('#city-input').value.trim();
+    var cityList = JSON.parse(window.localStorage.getItem("savedCities")) || [];
+    cityList.push(inputName);
+    window.localStorage.setItem("savedCities", JSON.stringify(cityList));
     cityNameEl = document.createElement("li");
     cityNameEl.setAttribute("class", "city-name-li");
     cityNameEl.setAttribute("data-cityName", inputName);
     cityNameEl.textContent = inputName;
-    // var deleteBtnEl = document.createElement("button");
-    // deleteBtnEl.textContent = "Delete";
-    // deleteBtnEl.setAttribute("class", "delete-item-btn");
-    // cityNameEl.appendChild(deleteBtnEl);
     cityListEl.appendChild(cityNameEl);
 }
-
 
 document.querySelector(".city-list").addEventListener('click', (getWeather));
 cityFormEl.addEventListener('submit', (handleFormSubmit));
 
 var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
-// var cityName = "Manchester";
 
 function getWeather(event) {
     var cityName = event.target.getAttribute("data-cityName");
-    console.log(cityName);
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
     .then(function (response) {
         return response.json();
