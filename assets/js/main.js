@@ -10,7 +10,10 @@
 var timeEl = document.getElementById("current-time");
 var dateEl = document.getElementById("current-date");
 var cityNameEl = document.querySelector(".city-name-li");
+var cityListEl = document.querySelector('.city-list');
+var cityFormEl = document.querySelector('.city-input-form');
 
+//Displays current time and date
 function displayTime() {
     let time = moment().format('hh:mm');
     let date = moment().format('MMM Do YYYY');
@@ -19,9 +22,22 @@ function displayTime() {
 }
 setInterval(displayTime, 1000);
 
-var cityListEl = document.querySelector('.city-list');
-var cityFormEl = document.querySelector('.city-input-form');
+//Renders list of cities from local storage
+function init() {
+    var cities = JSON.parse(window.localStorage.getItem("savedCities")) || [];
+    console.log(cities);
+        for (var i = 0; i < cities.length; i++) {
+            var city = cities[i];
+            cityNameEl = document.createElement("li");
+            cityNameEl.setAttribute("class", "city-name-li");
+            cityNameEl.setAttribute("data-cityName", city);
+            cityNameEl.textContent = city;
+            cityListEl.appendChild(cityNameEl);
+            };
+}
+init();
 
+//Saves input text to local storage and renders new city list item
 function handleFormSubmit(event) {
     event.preventDefault();
     var inputName = document.querySelector('#city-input').value.trim();
@@ -35,11 +51,8 @@ function handleFormSubmit(event) {
     cityListEl.appendChild(cityNameEl);
 }
 
-document.querySelector(".city-list").addEventListener('click', (getWeather));
-cityFormEl.addEventListener('submit', (handleFormSubmit));
-
+//Executes fetch request for clicked city list item
 var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
-
 function getWeather(event) {
     var cityName = event.target.getAttribute("data-cityName");
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
@@ -50,3 +63,7 @@ function getWeather(event) {
         console.log(data);
     });
 };
+
+//Click listeners to save run getWeather and handleFormSubmit functions
+document.querySelector(".city-list").addEventListener('click', (getWeather));
+cityFormEl.addEventListener('submit', (handleFormSubmit));
