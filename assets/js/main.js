@@ -7,25 +7,25 @@
     // Current weather data is rendered to the main weather dashboard card
     // 5 day forecast is rendered to card
 
-var timeEl = document.getElementById("current-time");
-var dateEl = document.getElementById("current-date");
+var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
+// var timeEl = document.getElementById("current-time");
+// var dateEl = document.getElementById("current-date");
 var cityNameEl = document.querySelector(".city-name-li");
 var cityListEl = document.querySelector('.city-list');
 var cityFormEl = document.querySelector('.city-input-form');
 
 //Displays current time and date
-function displayTime() {
-    let time = moment().format('hh:mm');
-    let date = moment().format('MMM Do YYYY');
-    timeEl.textContent = time;
-    dateEl.textContent = date;
-}
-setInterval(displayTime, 1000);
+// function displayTime() {
+//     let time = moment().format('hh:mm');
+//     let date = moment().format('MMM Do YYYY');
+//     timeEl.textContent = time;
+//     dateEl.textContent = date;
+// }
+// setInterval(displayTime, 1000);
 
 //Renders list of cities from local storage
 function init() {
     var cities = JSON.parse(window.localStorage.getItem("savedCities")) || [];
-    console.log(cities);
         for (var i = 0; i < cities.length; i++) {
             var city = cities[i];
             cityNameEl = document.createElement("li");
@@ -37,6 +37,7 @@ function init() {
 }
 init();
 
+//Fetches weather data for input city name
 //Saves input text to local storage and renders new city list item
 function handleFormSubmit(event) {
     event.preventDefault();
@@ -49,21 +50,27 @@ function handleFormSubmit(event) {
     cityNameEl.setAttribute("data-cityName", inputName);
     cityNameEl.textContent = inputName;
     cityListEl.appendChild(cityNameEl);
+    cityName = inputName;
+    getWeather(cityName);
 }
 
-//Executes fetch request for clicked city list item
-var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
-function getWeather(event) {
+//Runs getWeather function when city is clicked
+function pastCitySearch(event) {
     var cityName = event.target.getAttribute("data-cityName");
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
+    getWeather(cityName);
+}
+
+//Executes fetch request from API for selected city data
+function getWeather(cityName) {
+fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
         console.log(data);
     });
-};
+}
 
 //Click listeners to save run getWeather and handleFormSubmit functions
-document.querySelector(".city-list").addEventListener('click', (getWeather));
+document.querySelector(".city-list").addEventListener('click', (pastCitySearch));
 cityFormEl.addEventListener('submit', (handleFormSubmit));
