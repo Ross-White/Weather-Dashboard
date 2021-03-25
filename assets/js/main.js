@@ -53,12 +53,6 @@ function pastCitySearch(event) {
     getWeather(cityName);
 }
 
-function displayWeather(data) {
-    var weatherEl = document.createElement("h3");
-        weatherEl.textContent = data.current.weather[0].description;
-        weatherCardEl.appendChild(weatherEl); 
-}
-
 function getWeather(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=metric&appid=' + apiKey)
         .then(function (response) {
@@ -77,6 +71,35 @@ function getWeather(cityName) {
             })
     });
 }
+
+
+function displayWeather(data) {
+    var dailyDescription = data.daily[0].weather[0].description;
+    var dailyIcon = data.daily[0].weather[0].icon;
+    var dailyTemp = data.daily[0].temp.day;
+    var dailyCardEl = document.createElement("div");
+    dailyCardEl.setAttribute('class', 'card col-2');
+    var dailyDateEl = document.createElement("h4");
+    dailyDateEl.setAttribute('class', 'card-header');
+    dailyDateEl.textContent = dailyDescription;
+    var dailyIconEl = document.createElement("img");
+    dailyIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
+    var dailyTempEl = document.createElement("p");
+    dailyTempEl.textContent = dailyTemp;
+    
+    dailyCardEl.appendChild(dailyTempEl);
+    dailyCardEl.appendChild(dailyIconEl);
+    dailyCardEl.appendChild(dailyDateEl);
+
+    document.querySelector(".five-day").appendChild(dailyCardEl);
+     
+}
+
+{/* <div class="card col-2">
+    <h4 class="card-header">Date</h4>
+    <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
+    <p class="row">Temp, Humidity</p>
+</div> */}
 
 //Click listeners to save run getWeather and handleFormSubmit functions
 document.querySelector(".city-list").addEventListener('click', (pastCitySearch));
