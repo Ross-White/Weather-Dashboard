@@ -16,11 +16,11 @@
     </header>
     <main class="container-fluid">
         <section class="row">
-            <section class="card col-12 col-md-4 col-lg-3">
-                <form class="card-body city-input-form">
-                    <h3 class="card-header">Choose a location:</h3>
-                    <input id ="city-input" type="text" placeholder="Search City"></input>
-                    <button class="btn" type="submit">Search</button>
+            <section class="card col-12 col-md-4 col-lg-3 search-card">
+                <form class="form-floating card-body city-input-form">
+                    <input type="text" class="form-control" id="floatingInput"></input>
+                    <label for="floatingInput">City Name</label>
+                    <!-- <button class="btn" type="submit">Search</button> -->
                 </form>  
                 <ul class="list-group city-list">
                     <!--Append city names here-->
@@ -30,15 +30,20 @@
                 <div class="card weather-card">
                     <!--Create weather dashboard here-->
                     <div class="row">
-                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="100px"/>
-                        <h2>12</h4>
-                        <h3>Current Date and time</h3>
+                        <div class="col align-self-start">
+                            <h2>City Name</h2>
+                            <h3>Current Date and time</h3>
+                        </div>
+                        <div class="col align-self-end">
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" width="100px"/>
+                            <p>current conditions</p>
+                        </div>
                     </div>
-                    <h2>City Name</h2>
-                    <h4>Humidity</h4>
-                    <h4>Windspeed</h4>
-                    <h4>UV Index</h4>
-
+                    <div class="">
+                        <h4>Humidity</h4>
+                        <h4>Windspeed</h4>
+                        <h4>UV Index</h4>
+                    </div>
                 </div>
                 <div class="row five-day">
                     <!--5 day forecast cards here-->
