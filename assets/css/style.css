@@ -1,22 +1,30 @@
 .city-list {
     list-style: none;
+    margin-top: 4%;
+}
+.city-list > li {
+    margin: 5%;
 }
 
-.city-list > li {
-    background-color: blue;
-    color: white;
-    height: 45px;
+.city-list > li:hover {
+    cursor: pointer;
+}
+
+.city-input-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-card {
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     height: 70vh;
 }
 
 .weather-card {
-    background-color: aqua;
     display: flex;
     flex-direction: column;
     height: 50vh;
@@ -31,9 +39,10 @@
 .five-day > div {
     justify-content: center;
     align-items: center;
+    border-color: black;
 }
 
 .temp-date {
     display: flex;
     flex-direction: column;
-}
+} 

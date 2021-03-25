@@ -14,42 +14,40 @@
             <h1>Weather Dashboard</h1>
         </div>
     </header>
-    <main class="container-fluid">
-        <section class="row">
-            <section class="card col-12 col-md-4 col-lg-3 search-card">
-                <form class="form-floating card-body city-input-form">
-                    <input type="text" class="form-control" id="city-input"></input>
-                    <label for="floatingInput">City Name</label>
-                    <button class="btn" type="submit">Search</button>
-                </form>  
-                <ul class="list-group city-list">
-                    <!--Append city names here-->
-                </ul>
-            </section>      
-            <section class="col-12 col-md-8 col-lg-9">
-                <div class="card weather-card">
+    <main class="container-fluid row">
+        <section class="card col-12 col-md-4 col-lg-3">
+            <form class="city-input-form">
+                <input id="city-input" type="text" required placeholder="Search City Name"></input>
+                <label for="city-input" class="invisible">Search City Name</label>
+                <button class="btn" type="submit">Search</button>
+            </form>  
+            <ul class="list-group city-list">
+                <!--Append city names here-->
+            </ul>
+        </section>      
+        <section class="col-12 col-md-8 col-lg-9">
+            <div class="card  weather-card">
                     <!--Create weather dashboard here-->
-                    <!-- <div class="row">
-                        <div class="col align-self-start">
-                            <h2>City Name</h2>
-                            <h3>Current Date and time</h3>
-                        </div>
-                        <div class="col align-self-end">
-                            <img src="http://openweathermap.org/img/wn/10d@2x.png" width="100px"/>
-                            <p>current conditions</p>
-                        </div>
+                <!-- <div class="row">
+                    <div class="col align-self-start">
+                        <h2>City Name</h2>
+                        <h3>Current Date and time</h3>
                     </div>
-                    <div class="">
-                        <h4>Humidity</h4>
-                        <h4>Windspeed</h4>
-                        <h4>UV Index</h4>
-                    </div> -->
+                    <div class="col align-self-end">
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="100px"/>
+                        <p>current conditions</p>
+                    </div>
                 </div>
-                <div class="row five-day">
-                    <!--5 day forecast cards here-->
+                <div class="">
+                    <h4>Humidity</h4>
+                    <h4>Windspeed</h4>
+                    <h4>UV Index</h4>
+                </div> -->
+            </div>
+            <div class="row five-day">
+                <!--5 day forecast cards here-->
                     
-                </div>
-            </section>
+            </div>
         </section>
     </main> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -57,7 +55,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <!-- <script src="assets\js\citylist.js"></script> -->
     <script src="assets\js\main.js"></script>
     </body>
 </html>

@@ -65,18 +65,33 @@ function getWeather(cityName) {
             return response.json();
         })
             .then(function (data) {
-                console.log("complete", data);
+                // console.log("complete", data);
                 displayWeather(data);
+                display5Day(data);
             })
     });
 }
 
-
 function displayWeather(data) {
+    $(".weather-card").empty();
+    var currentTemp = data.current.temp;
+    var currentConditions = data.current.weather[0].description;
+    var currentHumidity = data.current.humidity;
+    var currentWind = data.current.wind_speed;
+    var currentUV = data.current.uvi;
+    var currentIcon = data.current.weather[0].icon;
+    var currentIconEl = document.createElement("img");
+    currentIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
+    currentIconEl.setAttribute("width", "400px");
+    document.querySelector(".weather-card").appendChild(currentIconEl);
+}
+
+function display5Day(data) {
+    $(".five-day").empty();
     var dailyWeatherArr = data.daily;
-    console.log(dailyWeatherArr);
+    // console.log(dailyWeatherArr);
     for (var i = 1; i < 6; i++) {
-        console.log(dailyWeatherArr[i]);
+        // console.log(dailyWeatherArr[i]);
         var dailyIcon = data.daily[i].weather[0].icon;
         var dailyTemp = data.daily[i].temp.day;
         var dailyCardEl = document.createElement("div");
