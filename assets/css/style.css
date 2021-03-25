@@ -1,3 +1,15 @@
 .weather-card {
     background-color: aqua;
+    display: flex;
+    flex-direction: column;
+}
+
+.five-day {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.five-day > div {
+    justify-content: center;
+    align-items: center;
 }

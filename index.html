@@ -12,27 +12,62 @@
     <header class="jumbotron jumbotron-fluid">
         <div class="container text-center">
             <h1>Weather Dashboard</h1>
-            <h2>Current Date: <span id="current-date"></span></h2>
-            <h2>Current Time: <span id="current-time"></span></h2>
-          </div>
+        </div>
     </header>
     <main class="container-fluid">
-        <section class="card col-12 col-md-4 col-lg-3">
-            <form class="card-body city-input-form">
-                <h3 class="card-header">Choose a location:</h3>
-                <input id ="city-input" type="text" placeholder="Search City"></input>
-                <button class="btn" type="submit">Search</button>
-            </form>  
-            <ul class="list-group city-list">
-                <!--Append city names here-->
-            </ul>
-        </section>      
-        <section class="col-12 col-md-8 col-lg-9">
-            <card class="weather-card">
-                <!--Create weather dashboard here-->
-            </card>
-            <section class="row">
-                <!--5 day forecast cards here-->
+        <section class="row">
+            <section class="card col-12 col-md-4 col-lg-3">
+                <form class="card-body city-input-form">
+                    <h3 class="card-header">Choose a location:</h3>
+                    <input id ="city-input" type="text" placeholder="Search City"></input>
+                    <button class="btn" type="submit">Search</button>
+                </form>  
+                <ul class="list-group city-list">
+                    <!--Append city names here-->
+                </ul>
+            </section>      
+            <section class="col-12 col-md-8 col-lg-9">
+                <div class="card weather-card">
+                    <!--Create weather dashboard here-->
+                    <div class="row">
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="100px"/>
+                        <h2>12</h4>
+                        <h3>Current Date and time</h3>
+                    </div>
+                    <h2>City Name</h2>
+                    <h4>Humidity</h4>
+                    <h4>Windspeed</h4>
+                    <h4>UV Index</h4>
+
+                </div>
+                <div class="row five-day">
+                    <!--5 day forecast cards here-->
+                    <div class="card col-2">
+                        <h4 class="card-header">Date</h4>
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
+                        <p class="row">Temp, Humidity</p>
+                    </div>
+                    <div class="card col-2">
+                        <h4 class="card-header">Date</h4>
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
+                        <p class="row">Temp, Humidity</p>
+                    </div>
+                    <div class="card col-2">
+                        <h4 class="card-header">Date</h4>
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
+                        <p class="row">Temp, Humidity</p>
+                    </div>
+                    <div class="card col-2">
+                        <h4 class="card-header">Date</h4>
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
+                        <p class="row">Temp, Humidity</p>
+                    </div>
+                    <div class="card col-2">
+                        <h4 class="card-header">Date</h4>
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
+                        <p class="row">Temp, Humidity</p>
+                    </div>
+                </div>
             </section>
         </section>
     </main> 
@@ -41,6 +76,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <!-- <script src="assets\js\citylist.js"></script> -->
     <script src="assets\js\main.js"></script>
     </body>
 </html>

@@ -8,20 +8,10 @@
     // 5 day forecast is rendered to card
 
 var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
-// var timeEl = document.getElementById("current-time");
-// var dateEl = document.getElementById("current-date");
 var cityNameEl = document.querySelector(".city-name-li");
 var cityListEl = document.querySelector('.city-list');
 var cityFormEl = document.querySelector('.city-input-form');
-
-//Displays current time and date
-// function displayTime() {
-//     let time = moment().format('hh:mm');
-//     let date = moment().format('MMM Do YYYY');
-//     timeEl.textContent = time;
-//     dateEl.textContent = date;
-// }
-// setInterval(displayTime, 1000);
+var weatherCardEl = document.querySelector('.weather-card');
 
 //Renders list of cities from local storage
 function init() {
@@ -41,6 +31,7 @@ init();
 //Saves input text to local storage and renders new city list item
 function handleFormSubmit(event) {
     event.preventDefault();
+    weatherCardEl.innerHTML = '';
     var inputName = document.querySelector('#city-input').value.trim();
     var cityList = JSON.parse(window.localStorage.getItem("savedCities")) || [];
     cityList.push(inputName);
@@ -51,23 +42,39 @@ function handleFormSubmit(event) {
     cityNameEl.textContent = inputName;
     cityListEl.appendChild(cityNameEl);
     cityName = inputName;
+    // getCurrentWeather(cityName);
     getWeather(cityName);
 }
 
 //Runs getWeather function when city is clicked
 function pastCitySearch(event) {
+    weatherCardEl.innerHTML = '';
     var cityName = event.target.getAttribute("data-cityName");
     getWeather(cityName);
 }
 
-//Executes fetch request from API for selected city data
+function displayWeather(data) {
+    var weatherEl = document.createElement("h3");
+        weatherEl.textContent = data.current.weather[0].description;
+        weatherCardEl.appendChild(weatherEl); 
+}
+
 function getWeather(cityName) {
-fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
-    .then(function (response) {
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=metric&appid=' + apiKey)
+        .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        console.log(data);
+        var lat = data.city.coord.lat;
+        var long = data.city.coord.lon;
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ long +'&units=metric&appid=' + apiKey)
+        .then(function (response) {
+            return response.json();
+        })
+            .then(function (data) {
+                console.log("complete", data);
+                displayWeather(data);
+            })
     });
 }
 
