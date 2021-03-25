@@ -42,7 +42,6 @@ function handleFormSubmit(event) {
     cityNameEl.textContent = inputName;
     cityListEl.appendChild(cityNameEl);
     cityName = inputName;
-    // getCurrentWeather(cityName);
     getWeather(cityName);
 }
 
@@ -74,32 +73,29 @@ function getWeather(cityName) {
 
 
 function displayWeather(data) {
-    var dailyDescription = data.daily[0].weather[0].description;
-    var dailyIcon = data.daily[0].weather[0].icon;
-    var dailyTemp = data.daily[0].temp.day;
-    var dailyCardEl = document.createElement("div");
-    dailyCardEl.setAttribute('class', 'card col-2');
-    var dailyDateEl = document.createElement("h4");
-    dailyDateEl.setAttribute('class', 'card-header');
-    dailyDateEl.textContent = dailyDescription;
-    var dailyIconEl = document.createElement("img");
-    dailyIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
-    var dailyTempEl = document.createElement("p");
-    dailyTempEl.textContent = dailyTemp;
-    
-    dailyCardEl.appendChild(dailyTempEl);
-    dailyCardEl.appendChild(dailyIconEl);
-    dailyCardEl.appendChild(dailyDateEl);
+    var dailyWeatherArr = data.daily;
+    console.log(dailyWeatherArr);
+    for (var i = 1; i < 6; i++) {
+        console.log(dailyWeatherArr[i]);
+        var dailyIcon = data.daily[i].weather[0].icon;
+        var dailyTemp = data.daily[i].temp.day;
+        var dailyCardEl = document.createElement("div");
+        dailyCardEl.setAttribute('class', 'card col-2');
+        var dailyIconEl = document.createElement("img");
+        dailyIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
+        var dailyTempEl = document.createElement("p");
+        dailyTempEl.textContent = dailyTemp;
 
-    document.querySelector(".five-day").appendChild(dailyCardEl);
-     
+        dailyCardEl.appendChild(dailyTempEl);
+        dailyCardEl.appendChild(dailyIconEl);
+        document.querySelector(".five-day").appendChild(dailyCardEl);
+
+    }
+    // var timestamp = data.daily[1].dt;
+    // var day = moment.unix(timestamp);
+    // console.log(day);
+         
 }
-
-{/* <div class="card col-2">
-    <h4 class="card-header">Date</h4>
-    <img src="http://openweathermap.org/img/wn/10d@2x.png" width="50px"/>
-    <p class="row">Temp, Humidity</p>
-</div> */}
 
 //Click listeners to save run getWeather and handleFormSubmit functions
 document.querySelector(".city-list").addEventListener('click', (pastCitySearch));
