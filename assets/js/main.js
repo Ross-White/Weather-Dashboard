@@ -74,41 +74,80 @@ function getWeather(cityName) {
 
 function displayWeather(data) {
     $(".weather-card").empty();
-    var currentTemp = data.current.temp;
-    var currentConditions = data.current.weather[0].description;
-    var currentHumidity = data.current.humidity;
-    var currentWind = data.current.wind_speed;
-    var currentUV = data.current.uvi;
-    var currentIcon = data.current.weather[0].icon;
+    var currentWeather = data.current;
+    // console.log(currentWeather);
+    var currentTemp = currentWeather.temp;
+    var currentTempEl = document.createElement("p");
+    currentTempEl.textContent= currentTemp;
+
+    var currentConditions = currentWeather.weather[0].description;
+    var currentConditionsEl = document.createElement("p");
+    currentConditionsEl.textContent= currentConditions;
+
+    var currentHumidity = currentWeather.humidity;
+    var currentHumidityEl = document.createElement("p");
+    currentHumidityEl.textContent= currentHumidity;
+
+    var currentWind = currentWeather.wind_speed;
+    var currentWindEl = document.createElement("p");
+    currentWindEl.textContent= currentWind;
+
+    var currentUV = currentWeather.uvi;
+    var currentUVEl = document.createElement("p");
+    currentUVEl.textContent= currentUV;
+
+    var currentIcon = currentWeather.weather[0].icon;
     var currentIconEl = document.createElement("img");
     currentIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
     currentIconEl.setAttribute("width", "400px");
+
+    document.querySelector(".weather-card").appendChild(currentTempEl);
+    document.querySelector(".weather-card").appendChild(currentConditionsEl);
+    document.querySelector(".weather-card").appendChild(currentHumidityEl);
+    document.querySelector(".weather-card").appendChild(currentWindEl);
+    document.querySelector(".weather-card").appendChild(currentUVEl);
     document.querySelector(".weather-card").appendChild(currentIconEl);
 }
 
-function display5Day(data) {
+function display5Day(weather) {
     $(".five-day").empty();
-    var dailyWeatherArr = data.daily;
-    // console.log(dailyWeatherArr);
+    var dailyWeatherArr = weather.daily;
     for (var i = 1; i < 6; i++) {
-        // console.log(dailyWeatherArr[i]);
-        var dailyIcon = data.daily[i].weather[0].icon;
-        var dailyTemp = data.daily[i].temp.day;
+        var dailyWeather = dailyWeatherArr[i];
+
+        //Create 5 day forecast cards
+        var dailyIcon = dailyWeather.weather[0].icon;
         var dailyCardEl = document.createElement("div");
         dailyCardEl.setAttribute('class', 'card col-2');
+        
+        //Display date
+        var date = moment.unix(dailyWeather.dt).format("ddd Do");
+        var dateEl = document.createElement("p");
+        dateEl.textContent = date;
+
+        //Display icon
         var dailyIconEl = document.createElement("img");
         dailyIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
+        
+        //Display temperature and humidity
+        var dailyTemp = dailyWeather.temp.day;
         var dailyTempEl = document.createElement("p");
-        dailyTempEl.textContent = dailyTemp;
+        dailyTempEl.textContent = "Temp: " + dailyTemp + "°C";
+        var dailyHumidity = dailyWeather.humidity;
+        var dailyHumidityEl = document.createElement("p");
+        dailyHumidityEl.textContent = "Humidity: " + dailyHumidity + "%";
 
-        dailyCardEl.appendChild(dailyTempEl);
+        //Append all elements to page
+        dailyCardEl.appendChild(dateEl);
         dailyCardEl.appendChild(dailyIconEl);
+        dailyCardEl.appendChild(dailyTempEl);
+        dailyCardEl.appendChild(dailyTempEl);
+        dailyCardEl.appendChild(dailyHumidityEl);
+
         document.querySelector(".five-day").appendChild(dailyCardEl);
 
     }
-    // var timestamp = data.daily[1].dt;
-    // var day = moment.unix(timestamp);
-    // console.log(day);
+    
          
 }
 

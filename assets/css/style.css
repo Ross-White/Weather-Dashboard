@@ -37,9 +37,10 @@
 }
 
 .five-day > div {
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     border-color: black;
+
 }
 
 .temp-date {
