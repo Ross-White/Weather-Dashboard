@@ -94,7 +94,17 @@ function displayWeather(data, cityName) {
 
     var currentUV = currentWeather.uvi;
     var currentUVEl = document.createElement("h5");
-    currentUVEl.textContent= "UV Index: " + currentUV;
+    var UVindexEl = document.createElement("span");
+    currentUVEl.textContent= "UV Index: ";
+    UVindexEl.textContent = currentUV;
+    console.log(currentUV)
+    if (currentUV <= 2){
+        UVindexEl.setAttribute("class", "favourable")
+    }else if (currentUV > 2 && currentUV <= 8){
+        UVindexEl.setAttribute("class", "moderate")
+    } else if (currentUV >8){
+        UVindexEl.setAttribute("class", "severe")
+    };
 
     var currentIcon = currentWeather.weather[0].icon;
     var currentIconEl = document.createElement("img");
@@ -119,6 +129,7 @@ function displayWeather(data, cityName) {
     weatherCardEl.appendChild(currentTempEl);
     weatherCardEl.appendChild(currentHumidityEl);
     weatherCardEl.appendChild(currentWindEl);
+    currentUVEl.appendChild(UVindexEl);
     weatherCardEl.appendChild(currentUVEl);
 }
 

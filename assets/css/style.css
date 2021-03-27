@@ -52,3 +52,12 @@
 .conditions {
     width: 20vw;
 }
+.favourable {
+    background-color: green;
+}
+.moderate {
+    background-color: yellow;
+}
+.severe {
+    background-color: red;
+}
