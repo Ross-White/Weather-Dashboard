@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
@@ -16,11 +17,12 @@
     </header>
     <main class="container-fluid row">
         <section class="card col-12 col-md-4 col-lg-3">
-            <form class="city-input-form">
-                <input id="city-input" type="text" required placeholder="Search City Name"></input>
-                <label for="city-input" class="invisible">Search City Name</label>
-                <button class="btn" type="submit">Search</button>
-            </form>  
+            <form class="input-group mb-3 city-input-form">
+                <input type="text" class="form-control city-input" placeholder="Search City" aria-label="City Name" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
             <ul class="list-group city-list">
                 <!--Append city names here-->
             </ul>
@@ -28,25 +30,9 @@
         <section class="col-12 col-md-8 col-lg-9">
             <div class="card  weather-card">
                     <!--Create weather dashboard here-->
-                <!-- <div class="row">
-                    <div class="col align-self-start">
-                        <h2>City Name</h2>
-                        <h3>Current Date and time</h3>
-                    </div>
-                    <div class="col align-self-end">
-                        <img src="http://openweathermap.org/img/wn/10d@2x.png" width="100px"/>
-                        <p>current conditions</p>
-                    </div>
-                </div>
-                <div class="">
-                    <h4>Humidity</h4>
-                    <h4>Windspeed</h4>
-                    <h4>UV Index</h4>
-                </div> -->
             </div>
             <div class="row five-day">
                 <!--5 day forecast cards here-->
-                    
             </div>
         </section>
     </main> 

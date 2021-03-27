@@ -39,11 +39,16 @@
 .five-day > div {
     justify-content: space-evenly;
     align-items: center;
-    border-color: black;
+    height: 20vh;
 
 }
 
-.temp-date {
+.card-header {
     display: flex;
-    flex-direction: column;
-} 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.conditions {
+    width: 20vw;
+}

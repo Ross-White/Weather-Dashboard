@@ -32,7 +32,7 @@ init();
 function handleFormSubmit(event) {
     event.preventDefault();
     weatherCardEl.innerHTML = '';
-    var inputName = document.querySelector('#city-input').value.trim();
+    var inputName = document.querySelector('.city-input').value.trim();
     var cityList = JSON.parse(window.localStorage.getItem("savedCities")) || [];
     cityList.push(inputName);
     window.localStorage.setItem("savedCities", JSON.stringify(cityList));
@@ -66,47 +66,60 @@ function getWeather(cityName) {
         })
             .then(function (data) {
                 // console.log("complete", data);
-                displayWeather(data);
+                displayWeather(data, cityName);
                 display5Day(data);
             })
     });
 }
 
-function displayWeather(data) {
+function displayWeather(data, cityName) {
     $(".weather-card").empty();
     var currentWeather = data.current;
-    // console.log(currentWeather);
+
     var currentTemp = currentWeather.temp;
-    var currentTempEl = document.createElement("p");
-    currentTempEl.textContent= currentTemp;
+    var currentTempEl = document.createElement("h5");
+    currentTempEl.textContent= "Temp: " + currentTemp + "°C";
 
     var currentConditions = currentWeather.weather[0].description;
-    var currentConditionsEl = document.createElement("p");
+    var currentConditionsEl = document.createElement("h5");
     currentConditionsEl.textContent= currentConditions;
 
     var currentHumidity = currentWeather.humidity;
-    var currentHumidityEl = document.createElement("p");
-    currentHumidityEl.textContent= currentHumidity;
+    var currentHumidityEl = document.createElement("h5");
+    currentHumidityEl.textContent= "Humidity: " + currentHumidity + "%";
 
     var currentWind = currentWeather.wind_speed;
-    var currentWindEl = document.createElement("p");
-    currentWindEl.textContent= currentWind;
+    var currentWindEl = document.createElement("h5");
+    currentWindEl.textContent= "Wind Speed: " + currentWind + "m/s";
 
     var currentUV = currentWeather.uvi;
-    var currentUVEl = document.createElement("p");
-    currentUVEl.textContent= currentUV;
+    var currentUVEl = document.createElement("h5");
+    currentUVEl.textContent= "UV Index: " + currentUV;
 
     var currentIcon = currentWeather.weather[0].icon;
     var currentIconEl = document.createElement("img");
     currentIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + currentIcon + "@2x.png");
-    currentIconEl.setAttribute("width", "400px");
+    currentIconEl.setAttribute("width", "100vw");
+    var date = moment.unix(currentWeather.dt).format("ddd Do MMMM");
+    console.log(date);
 
-    document.querySelector(".weather-card").appendChild(currentTempEl);
-    document.querySelector(".weather-card").appendChild(currentConditionsEl);
-    document.querySelector(".weather-card").appendChild(currentHumidityEl);
-    document.querySelector(".weather-card").appendChild(currentWindEl);
-    document.querySelector(".weather-card").appendChild(currentUVEl);
-    document.querySelector(".weather-card").appendChild(currentIconEl);
+    $("<div>").addClass("card-header row").appendTo(weatherCardEl);
+    $("<div>").addClass("name-date").appendTo($(".card-header"))
+    $("<h3>").text(cityName).appendTo($(".name-date"));
+    $("<h4>").text(date).appendTo($(".name-date"));
+    // var date = moment.unix(currentWeather.dt).format("ddd Do");
+    // dateEl.textContent = date;
+
+    var conditionsEl = document.createElement("div");
+    conditionsEl.setAttribute("class", "conditions");
+    document.querySelector(".card-header").appendChild(conditionsEl);
+    conditionsEl.appendChild(currentIconEl);
+    conditionsEl.appendChild(currentConditionsEl);
+    
+    weatherCardEl.appendChild(currentTempEl);
+    weatherCardEl.appendChild(currentHumidityEl);
+    weatherCardEl.appendChild(currentWindEl);
+    weatherCardEl.appendChild(currentUVEl);
 }
 
 function display5Day(weather) {
@@ -116,16 +129,17 @@ function display5Day(weather) {
         var dailyWeather = dailyWeatherArr[i];
 
         //Create 5 day forecast cards
-        var dailyIcon = dailyWeather.weather[0].icon;
         var dailyCardEl = document.createElement("div");
         dailyCardEl.setAttribute('class', 'card col-2');
         
         //Display date
         var date = moment.unix(dailyWeather.dt).format("ddd Do");
-        var dateEl = document.createElement("p");
+        var dateEl = document.createElement("h5");
+        dateEl.setAttribute("class", "card-title")
         dateEl.textContent = date;
 
         //Display icon
+        var dailyIcon = dailyWeather.weather[0].icon;
         var dailyIconEl = document.createElement("img");
         dailyIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
         
