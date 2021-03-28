@@ -173,6 +173,13 @@ function display5Day(weather) {
          
 }
 
+function clearSearch() {
+    window.localStorage.removeItem("savedCities");
+    $(".city-list").empty();
+
+}
+
 //Click listeners to save run getWeather and handleFormSubmit functions
+document.querySelector(".clear-search-btn").addEventListener('click', (clearSearch));
 document.querySelector(".city-list").addEventListener('click', (pastCitySearch));
 cityFormEl.addEventListener('submit', (handleFormSubmit));
