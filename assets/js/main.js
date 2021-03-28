@@ -1,12 +1,3 @@
-// Page load displays time and date in header
-    // Retrieves and renders searched cities from local storage in ul at side
-        // Creates new li elements in ul when new cities are searched in input
-        // li elements have delete button, removed when clicked
-// When city is selected from list, fetch request is made to openweather API
-    // Clicked city name gets the city ID from a JSON list
-    // Current weather data is rendered to the main weather dashboard card
-    // 5 day forecast is rendered to card
-
 var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
 var cityListEl = document.querySelector(".city-list");
 var cityFormEl = document.querySelector('.city-input-form');
@@ -27,7 +18,7 @@ function init() {
 };
 init();
 
-//Fetches weather data for input city name
+//Fetches weather data for input city name, displays data
 //Saves input text to local storage and renders new city list item
 function handleFormSubmit(event) {
     event.preventDefault();
@@ -52,6 +43,7 @@ function pastCitySearch(event) {
     getWeather(cityName);
 }
 
+//Uses Fetch to get data from API
 function getWeather(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=metric&appid=' + apiKey)
         .then(function (response) {
@@ -71,6 +63,7 @@ function getWeather(cityName) {
     });
 }
 
+//Displays current weather conditions
 function displayWeather(data, cityName) {
     $(".weather-card").empty();
     $(".city-input").val('');
@@ -130,6 +123,7 @@ function displayWeather(data, cityName) {
     weatherCardEl.appendChild(currentUVEl);
 }
 
+//Displays five day forecast 
 function display5Day(weather) {
     $(".five-day").empty();
     var dailyWeatherArr = weather.daily;
@@ -138,7 +132,7 @@ function display5Day(weather) {
 
         //Create 5 day forecast cards
         var dailyCardEl = document.createElement("div");
-        dailyCardEl.setAttribute('class', 'card col-2');
+        dailyCardEl.setAttribute('class', 'card col-2 mdc-tab-scroller__scroll-content');
         
         //Display date
         var date = moment.unix(dailyWeather.dt).format("ddd Do");
@@ -148,8 +142,10 @@ function display5Day(weather) {
 
         //Display icon
         var dailyIcon = dailyWeather.weather[0].icon;
+        var iconDiv = document.createElement("div");
         var dailyIconEl = document.createElement("img");
         dailyIconEl.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
+        iconDiv.appendChild(dailyIconEl);
         
         //Display temperature and humidity
         var dailyTemp = dailyWeather.temp.day;
@@ -160,11 +156,12 @@ function display5Day(weather) {
         dailyHumidityEl.textContent = "Humidity: " + dailyHumidity + "%";
 
         //Append all elements to page
+        var dailyConditions = document.createElement("div");
         dailyCardEl.appendChild(dateEl);
-        dailyCardEl.appendChild(dailyIconEl);
-        dailyCardEl.appendChild(dailyTempEl);
-        dailyCardEl.appendChild(dailyTempEl);
-        dailyCardEl.appendChild(dailyHumidityEl);
+        dailyConditions.appendChild(dailyTempEl);
+        dailyConditions.appendChild(dailyHumidityEl);
+        dailyCardEl.appendChild(dailyConditions);
+        dailyCardEl.appendChild(iconDiv);
 
         document.querySelector(".five-day").appendChild(dailyCardEl);
 
@@ -173,10 +170,10 @@ function display5Day(weather) {
          
 }
 
+//Clears text from input area 
 function clearSearch() {
     window.localStorage.removeItem("savedCities");
     $(".city-list").empty();
-
 }
 
 //Click listeners to save run getWeather and handleFormSubmit functions
