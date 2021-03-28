@@ -72,3 +72,11 @@ main {
 .severe {
     background-color: red;
 }
+
+@media screen and (max-width: 768px) {
+    .city-list {
+        display: none;
+    }
+
+    
+}

@@ -8,23 +8,23 @@
     // 5 day forecast is rendered to card
 
 var apiKey = "9d4409d2aba8ab623ad65173ce78380e";
-var cityNameEl = document.querySelector(".city-name-li");
-var cityListEl = document.querySelector('.city-list');
+var cityListEl = document.querySelector(".city-list");
 var cityFormEl = document.querySelector('.city-input-form');
 var weatherCardEl = document.querySelector('.weather-card');
 
 //Renders list of cities from local storage
 function init() {
     var cities = JSON.parse(window.localStorage.getItem("savedCities")) || [];
-        for (var i = 0; i < cities.length; i++) {
-            var city = cities[i];
-            cityNameEl = document.createElement("li");
-            cityNameEl.setAttribute("class", "city-name-li");
-            cityNameEl.setAttribute("data-cityName", city);
-            cityNameEl.textContent = city;
-            cityListEl.appendChild(cityNameEl);
-            };
-}
+    for (var i = 0; i < cities.length; i++) {
+        var city = cities[i];
+        cityNameEl = document.createElement("li");
+        cityNameEl.setAttribute("class", "city-name-li");
+        cityNameEl.setAttribute("data-cityName", city);
+        cityNameEl.textContent = city;
+        cityListEl.appendChild(cityNameEl);
+    }
+   
+};
 init();
 
 //Fetches weather data for input city name
