@@ -30,3 +30,25 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
+## Implementation
+
+During the development of the app, used used a variety of technologies:
+* Vanilla Javascript
+    * I mostly used vanilla Javascript, as I wanted to challenge myself to fully understand to language.
+* JQuery
+    * In some areas I chose to use JQuery for more concise code.
+* CSS
+    * CSS was used to add custom styles on top of the Bootstrap framework.
+* Bootstrap
+    * I used Bootstrap to quickly and easily create the basic page structure, and to become more familiar with using CSS frameworks.
+* Moment.js
+
+## Screenshots
+
+![Screenshot](assets\pictures\screenshot.png)
+
+![Screenshot](assets\pictures\Weather_Dashboard.gif)
+
+## Deployed Application
+
+https://ross-white.github.io/Weather-Dashboard/
