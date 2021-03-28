@@ -65,7 +65,6 @@ function getWeather(cityName) {
             return response.json();
         })
             .then(function (data) {
-                // console.log("complete", data);
                 displayWeather(data, cityName);
                 display5Day(data);
             })
@@ -74,8 +73,8 @@ function getWeather(cityName) {
 
 function displayWeather(data, cityName) {
     $(".weather-card").empty();
+    $(".city-input").val('');
     var currentWeather = data.current;
-
     var currentTemp = currentWeather.temp;
     var currentTempEl = document.createElement("h5");
     currentTempEl.textContent= "Temp: " + currentTemp + "°C";
@@ -115,10 +114,8 @@ function displayWeather(data, cityName) {
 
     $("<div>").addClass("card-header row").appendTo(weatherCardEl);
     $("<div>").addClass("name-date").appendTo($(".card-header"))
-    $("<h3>").text(cityName).appendTo($(".name-date"));
+    $("<h2>").text(cityName).appendTo($(".name-date"));
     $("<h4>").text(date).appendTo($(".name-date"));
-    // var date = moment.unix(currentWeather.dt).format("ddd Do");
-    // dateEl.textContent = date;
 
     var conditionsEl = document.createElement("div");
     conditionsEl.setAttribute("class", "conditions");

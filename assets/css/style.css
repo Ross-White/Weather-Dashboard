@@ -1,3 +1,17 @@
+:root {
+    --dark: #012542;
+    --light: #dff1f7;
+}
+
+main {
+    font-family: 'Baloo 2', cursive;
+}
+.jumbotron {
+    background-color: var(--dark);
+    color: var(--light);
+    font-family: 'Baloo 2', cursive;
+}
+
 .city-list {
     list-style: none;
     margin-top: 4%;
@@ -8,45 +22,42 @@
 
 .city-list > li:hover {
     cursor: pointer;
-}
-
-.city-input-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    background: var(--dark);
+    color: var(--light);
 }
 
 .search-card {
     display: flex;
     justify-content: center; 
     align-items: center;
-    height: 70vh;
+    height:80vh;
 }
 
 .weather-card {
     display: flex;
     flex-direction: column;
     height: 50vh;
+    justify-content: space-evenly;
+    border-style: none;
 }
 
 .five-day {
     justify-content: space-evenly;
     align-items: center;
-    height: 20vh;
 }
 
 .five-day > div {
     justify-content: space-evenly;
     align-items: center;
-    height: 20vh;
-
+    height: 30vh;
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    background: white;
+    height: 20vh;
 }
 
 .conditions {
