@@ -34,7 +34,7 @@ THEN I am again presented with current and future conditions for that city
 
 During the development of the app, used used a variety of technologies:
 * Vanilla Javascript
-    * I mostly used vanilla Javascript, as I wanted to challenge myself to fully understand to language.
+    * I mostly used vanilla Javascript, as I wanted to challenge myself to fully understand the fundamentals of the  language.
 * JQuery
     * In some areas I chose to use JQuery for more concise code.
 * CSS
@@ -45,9 +45,9 @@ During the development of the app, used used a variety of technologies:
 
 ## Screenshots
 
-![Screenshot](assets\pictures\screenshot.png)
+![Screenshot](./assets/pictures/screenshot.png)
 
-![Screenshot](assets\pictures\Weather_Dashboard.gif)
+![Screenshot](./assets/pictures/Weather_Dashboard.gif)
 
 ## Deployed Application
 
